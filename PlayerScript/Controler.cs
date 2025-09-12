@@ -4,13 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class SnakeHeadController : MonoBehaviour
 {
-	public float MoveSpeed = 5f;
+	public float MoveSpeed = 15f;
 	public float SteerSpeed = 180;
-
-	public int Gap = 8;
+	public int Gap = 1;
 	public float BodySpeed = 5;
 	public GameObject BodyPrefab;
-	public int Points = 0;
 
 	private List<GameObject> BodyParts = new List<GameObject>();
 	private List<Vector3> PositionsHistory = new List<Vector3>();
@@ -18,25 +16,10 @@ public class SnakeHeadController : MonoBehaviour
 
 	void Start()
 	{
-		// var snakeLenght = 
-		var snakeLenght = 0;
-		var snakeStartLenght = 3;
-
-		while (snakeLenght < snakeStartLenght)
-		{
-			GrowSnake();
-			snakeLenght++;
-			// if hit wall (update())
-			
-		}
-
-
-		// GrowSnake();
-		// GrowSnake();
-		// GrowSnake();
-		// GrowSnake();
+		GrowSnake();
+		
 	}
-	int Update()
+	void Update()
 	{
 		//move forward
 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
@@ -55,7 +38,6 @@ public class SnakeHeadController : MonoBehaviour
 			body.transform.LookAt(point);
 			index++;
 		}
-		return 0;
 	}
 
 	private void GrowSnake()
@@ -63,6 +45,11 @@ public class SnakeHeadController : MonoBehaviour
 		GameObject body = Instantiate(BodyPrefab);
 		BodyParts.Add(body);
 	}
+	
+	//if(create_new_node_at_tail)
+	//{
+
+	//}
 	//transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 	//transform.Rotate(0, rotationAngle * Time.deltaTime, 0);
 	//transform.Translate(forward);
@@ -76,10 +63,19 @@ public class SnakeHeadController : MonoBehaviour
 	// }
 
 	// Example: Create a wall at runtime
-// GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-// wall.transform.position = new Vector3(0, 0, 5);
-// wall.tag = "Wall";
+	// GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+	// wall.transform.position = new Vector3(0, 0, 5);
+	// wall.tag = "Wall";
 }
-
-
-
+void OnTriggerEnter(Collider target)
+{
+	if (target.tag == Tags.FOOD)
+	{
+		target.gameObject.SetActive(false);
+		create_Node_Tail = true;
+	}
+	if (target.tag == Tags.Wall || target.tag == Tags.BOOMB)
+	{
+		print("Touched BOOMB");
+	}
+}

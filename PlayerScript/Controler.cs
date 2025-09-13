@@ -66,6 +66,7 @@ public class SnakeHeadController : MonoBehaviour
 
     private void OnTriggerEnter(Collider target)
     {
+        Debug.Log("Triggered by: " + target.name);
         if (target.CompareTag("Food"))
         {
             target.gameObject.SetActive(false);

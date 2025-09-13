@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SnakeHeadController : MonoBehaviour
 {
+    Collider m_ObjectCollider;
+
     [Header("Movement Settings")]
     public float MoveSpeed = 15f;
     public float SteerSpeed = 180f;
@@ -20,7 +22,9 @@ public class SnakeHeadController : MonoBehaviour
 
     void Start()
     {
-        GrowSnake(); 
+        m_ObjectCollider = GetComponent<Collider>();
+        m_ObjectCollider.isTrigger = true;
+        GrowSnake();
     }
 
     void Update()

@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SnakeHeadController : MonoBehaviour
 {
+    // Collider m_ObjectCollider;
+
     [Header("Movement Settings")]
     public float MoveSpeed = 15f;
     public float SteerSpeed = 180f;
@@ -20,7 +22,9 @@ public class SnakeHeadController : MonoBehaviour
 
     void Start()
     {
-        GrowSnake(); 
+        // m_ObjectCollider = GetComponent<Collider>();
+        // m_ObjectCollider.isTrigger = true;
+        GrowSnake();
     }
 
     void Update()
@@ -67,10 +71,11 @@ public class SnakeHeadController : MonoBehaviour
             target.gameObject.SetActive(false);
             createNodeTail = true; // Trigger body growth
         }
-        else if (target.CompareTag("Wall") || target.CompareTag("Boomb"))
+        else if (target.CompareTag("Walll") || target.CompareTag("Trap"))
         {
-            Debug.Log("Touched Wall or Boomb");
+            Debug.Log("Touched Walll or Trap");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restart scene
         }
+
     }
 }

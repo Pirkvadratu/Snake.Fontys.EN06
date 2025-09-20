@@ -22,8 +22,6 @@ public class SnakeHeadController : MonoBehaviour
 
     void Start()
     {
-        // m_ObjectCollider = GetComponent<Collider>();
-        // m_ObjectCollider.isTrigger = true;
         GrowSnake();
     }
 
